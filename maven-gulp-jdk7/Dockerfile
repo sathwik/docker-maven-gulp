@@ -20,8 +20,11 @@ RUN mkdir -p /opt/node \
 ENV PATH /opt/node/bin:$PATH
 
 RUN npm install -g minimatch@3.0.2 \
-  && npm install -g gulp \
-  && npm install -g bower
+  && npm install -g bower \
+  && npm install -g gulp
+
+RUN update-alternatives --install /usr/local/bin/bower bower /opt/node/bin/bower 1 \
+    && update-alternatives --install /usr/local/bin/gulp gulp /opt/node/bin/gulp 1
 
 #install phontomjs
 RUN curl -SLO https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOSJS_VERSION-linux-x86_64.tar.bz2 \
